@@ -10,7 +10,7 @@
         public string provincia { get; set; } = string.Empty;
         public string canton { get; set; } = string.Empty;
         public string distrito { get; set; } = string.Empty;
-        public float salario { get; set; } = 0.0f;
+        public double salario { get; set; }
         public string correo { get; set; } = string.Empty;
         public string password { get; set; } = string.Empty;
     }

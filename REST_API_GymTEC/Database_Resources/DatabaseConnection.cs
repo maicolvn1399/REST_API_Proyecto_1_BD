@@ -90,7 +90,8 @@ namespace REST_API_GymTEC.Database_Resources
                 
             }finally 
             {
-                conn.Close(); }
+                conn.Close(); 
+            }
 
         }
 
@@ -232,10 +233,43 @@ namespace REST_API_GymTEC.Database_Resources
         {
 
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            
 
-            conn.Open();
-            return false;
+
+            return true;
+
+        }
+
+        public static DataTable ExecuteLoginWorker(Credentials_Worker credentials)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            string encrypted_password = Encryption.encrypt_password(credentials.password);
+            try
+            {
+                
+                
+                string query = String.Format("SELECT Cedula,Nombre,Apellido1,Apellido2,Provincia,Canton,Distrito,Salario,Correo,Password\r\n" +
+                    "FROM Empleado\r\n" +
+                    "WHERE Cedula = '{0}' AND Password = '{1}'", credentials.cedula, encrypted_password);
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
 
         }
 
