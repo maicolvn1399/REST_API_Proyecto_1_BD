@@ -1,6 +1,7 @@
 ﻿
 
 using REST_API_GymTEC.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -37,6 +38,62 @@ namespace REST_API_GymTEC.Database_Resources
             }
         }
 
+        public static DataTable ExecuteGetPhonesXBranch(string branch_name)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                conn.Open();
+                string query = String.Format("SELECT Telefono \r\n" +
+                    "FROM TelefonoXSucursal\r\n" +
+                    "WHERE Sucursal_nombre = '{0}'", branch_name);
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+                return table;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();   
+            }
+        }
+
+        public static void ExecuteAddPhonesBranch(string branch_phone, List<string> phones)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            int i;
+            try
+            {
+                conn.Open();
+                foreach(var phone in phones)
+                {
+                    string query = String.Format("INSERT INTO TelefonoXSucursal(Sucursal_nombre, Telefono)\r\n" +
+                    "VALUES('{0}','{1}')", branch_phone,phone);
+                    Console.WriteLine(query);
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.ExecuteNonQuery();
+
+                }
+                   
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                
+            }finally 
+            {
+                conn.Close(); }
+
+        }
+
         public static DataTable ExecuteGetBranch(Branch_Identifier branch_to_get)
         {
             SqlConnection conn = new SqlConnection(cadenaConexion);
@@ -52,6 +109,7 @@ namespace REST_API_GymTEC.Database_Resources
                 DataTable table = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(table);
+   
                 return table;
             }catch(Exception ex)
             {

@@ -15,7 +15,7 @@ namespace REST_API_GymTEC.Controllers
         [HttpGet("get_all_branches")]
         public async Task<ActionResult<JSON_Object>> GetAllBranches()
         {
-            JSON_Object json = new JSON_Object("error",null);
+            JSON_Object json = new JSON_Object("error", null);
 
             try
             {
@@ -27,20 +27,18 @@ namespace REST_API_GymTEC.Controllers
                     Branch_Identifier branch_identifier = new Branch_Identifier();
                     branch_identifier.nombre_sucursal = row["Nombre"].ToString();
                     all_branches_list.Add(branch_identifier);
-
                 }
-
                 json.status = "ok";
                 json.result = all_branches_list;
                 return Ok(json);
 
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 return BadRequest(json);
             }
-            
-            
+
+
 
         }
 
@@ -67,10 +65,20 @@ namespace REST_API_GymTEC.Controllers
                     branch.active_store = Convert.ToBoolean(row["activeStore"]);
 
                 }
+
+                DataTable phones_table = DatabaseConnection.ExecuteGetPhonesXBranch(branch_to_get.nombre_sucursal);
+                List<string> phones_list = new List<string>();
+                foreach (DataRow row in phones_table.Rows)
+                {
+                    phones_list.Add(row["Telefono"].ToString());
+                }
+
+                branch.telefonos = phones_list;
+
                 json.status = "ok";
                 json.result = branch;
                 return Ok(json);
-            }catch(Exception ex) 
+            } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
@@ -84,8 +92,10 @@ namespace REST_API_GymTEC.Controllers
         {
             JSON_Object json = new JSON_Object("error", null);
             bool var = DatabaseConnection.ExecuteAddBranch(new_branch);
-            if(var)
+            
+            if (var)
             {
+                DatabaseConnection.ExecuteAddPhonesBranch(new_branch.nombre_sucursal, new_branch.telefonos);
                 json.status = "ok";
                 return Ok(json);
             }
@@ -113,10 +123,18 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        [HttpDelete("delete_branch")]
+        public async Task<ActionResult<JSON_Object>> DeleteBranch(Branch_Identifier branch_to_delete)
+        {
+            JSON_Object json = new JSON_Object("error", null);
+            return BadRequest(json);
+        }
 
 
 
 
 
-    }
+
+
+        }
 }
