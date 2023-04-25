@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Net;
 
 namespace REST_API_GymTEC.Database_Resources
 {
@@ -265,6 +266,75 @@ namespace REST_API_GymTEC.Database_Resources
                 Console.WriteLine(ex.Message);
                 return null;
 
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+
+
+
+        }
+
+        public static DataTable ExecuteGetServices()
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT Sucursal_nombre as nombre_sucursal, Servicio.Descripcion as servicio\r\nFROM Servicio INNER JOIN ServicioXSucursal on Servicio.ID = ServicioXSucursal.Servicio_ID");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+        public static bool ExecuteAddService(ServiceAdd serviceAdd)
+        {
+
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            { 
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("INSERT INTO Servicio(Descripcion)" +
+                    "\r\nVALUES('{0}')",
+                    serviceAdd.servicio);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
             finally
             {

@@ -5,6 +5,5 @@
     {
         public string nombre_sucursal { get; set; } = string.Empty;
         public string servicio { get; set; } = string.Empty;
-        public string descripcion { get; set; } = string.Empty;
     }
 }
