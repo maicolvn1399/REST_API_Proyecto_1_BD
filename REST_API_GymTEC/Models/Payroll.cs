@@ -5,7 +5,8 @@
     public class Payroll
     {
         public string empleado_cedula { get; set; } = string.Empty;
-        public int planilla_id { get; set; } = 0;
-        public string descripcion { get; set; } = string.Empty;
+        public string nombre_planilla { get; set; } = string.Empty;
+
+        public double salario = 0.0f;
     }
 }
