@@ -12,7 +12,7 @@
         public string email { get; set; } = string.Empty;
         public string password { get; set; } = string.Empty;
         public float IMC { get; set; }
-        public int edad { get; set; };
+        public int edad { get; set; }
 
     }
 }

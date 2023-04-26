@@ -342,6 +342,69 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
         }
+        public static DataTable ExecuteGetAllPayrolls()
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT\r\n\te.Cedula as empleado_cedula,\r\n\tp.Descripcion as planilla_tipo,\r\n\tCASE\r\n\t\tWHEN p.Descripcion = 'Mensual' THEN e.Salario\r\n\t\tWHEN p.Descripcion = 'Por clase' THEN COUNT(c.ID) * e.Salario\r\n\t\tWHEN p.Descripcion = 'Por hora' THEN SUM(DATEDIFF(HOUR, c.Hora_ing, c.Hora_sal)) * e.Salario\r\n\t\tEND AS salario\r\n\tFROM \r\n\tEmpleado e \r\n\tINNER JOIN Planilla p ON e.Planilla = p.ID\r\n\tLEFT JOIN Clase c ON e.Cedula = c.Encargado\r\n\r\n\tWHERE \r\n\t\te.Planilla IN (1,2,3)\r\n\r\n\tGROUP BY \r\n\t\te.Cedula,\r\n\t\te.Nombre,\r\n\t\te.Planilla,\r\n\t\tp.Descripcion,\r\n\t\te.Salario;");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static DataTable ExecuteGetPayroll(Employee_Identifier cedula)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT\r\n\te.Cedula as empleado_cedula,\r\n\tp.Descripcion as planilla_tipo,\r\n\tCASE\r\n\t\tWHEN p.Descripcion = 'Mensual' THEN e.Salario\r\n\t\tWHEN p.Descripcion = 'Por clase' THEN COUNT(c.ID) * e.Salario\r\n\t\tWHEN p.Descripcion = 'Por hora' THEN SUM(DATEDIFF(HOUR, c.Hora_ing, c.Hora_sal)) * e.Salario\r\n\t\tEND AS salario\r\n\tFROM \r\n\tEmpleado e \r\n\tINNER JOIN Planilla p ON e.Planilla = p.ID\r\n\tLEFT JOIN Clase c ON e.Cedula = c.Encargado\r\n\r\n\tWHERE \r\n\t\te.Cedula = '{0}'\r\n\r\n\tGROUP BY \r\n\t\te.Cedula,\r\n\t\te.Nombre,\r\n\t\te.Planilla,\r\n\t\tp.Descripcion,\r\n\t\te.Salario;", cedula.cedula_empleado);
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
 
 
     }
