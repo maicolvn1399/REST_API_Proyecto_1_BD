@@ -854,6 +854,41 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
         }
+        public static bool ExecuteAssignProduct(Associate_product product)
+        {
+
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("INSERT INTO ProductoXSucursal(Sucursal_nombre, Producto_ID)\r\nVALUES(\r\n'{0}','{1}');",
+                    product.sucursal,
+                    product.product);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
 
 
     }

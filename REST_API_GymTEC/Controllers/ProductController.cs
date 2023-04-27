@@ -131,5 +131,21 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+        [HttpPost("associate_product")]
+        public async Task<ActionResult<JSON_Object>> AssignProduct(Associate_product obj)
+        {
+            JSON_Object json = new JSON_Object("error", null);
+            bool var = DatabaseConnection.ExecuteAssignProduct(obj);
+            if (var)
+            {
+                json.status = "ok";
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
     }
 }
