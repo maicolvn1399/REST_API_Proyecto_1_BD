@@ -656,7 +656,204 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
         }
+        public static DataTable ExecuteGetAllProducts()
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
 
+
+                string query = String.Format("SELECT Nombre as nombre_producto, Costo as costo\r\nFROM Producto");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static DataTable ExecuteGetProduct(Product_Identifier barras)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT Codigo_barras as codigo_barras, Nombre as nombre_producto, Costo as costo, Descripcion as descripcion\r\nFROM Producto\r\nWHERE Codigo_barras = '{0}'", barras.codigo_barras.ToString());
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static bool ExecuteAddProduct(Product product)
+        {
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("INSERT INTO Producto (Codigo_barras, Nombre, Costo, Descripcion)\r\nVALUES\r\n('{0}','{1}',{2},'{3}');",
+                        product.codigo_barras,
+                        product.nombre_producto,
+                        product.costo,
+                        product.descripcion);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static DataTable ExecuteGetPositions()
+
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT Descripcion as tipo_puesto \r\nFROM Puesto");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static bool ExecuteUpdateProduct(Product product)
+        {
+
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("UPDATE Producto\r\nSET \r\nCodigo_barras = '{0}',\r\nNombre = '{1}',\r\nCosto = {2},\r\nDescripcion = '{3}'\r\nWHERE \r\nCodigo_barras = '{0}';",
+                    product.codigo_barras,
+                    product.nombre_producto,
+                    product.costo,
+                    product.descripcion);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static bool ExecuteDeleteProduct(Product_Identifier barras)
+        {
+
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("DELETE FROM ProductoXSucursal\r\nWHERE Producto_ID = '{0}'\r\n\r\nDELETE FROM Producto\r\nWHERE Codigo_barras = '{0}';", barras.codigo_barras);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
 
 
     }
