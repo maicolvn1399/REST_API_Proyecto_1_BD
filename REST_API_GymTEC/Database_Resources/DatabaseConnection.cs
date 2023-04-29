@@ -925,6 +925,46 @@ namespace REST_API_GymTEC.Database_Resources
 
 
         }
+        public static bool ExecuteCreateClient(Client_Register client)
+        {
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            string encrypted_password = Encryption.encrypt_password(client.password);
+            try
+            {
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("INSERT INTO Cliente(Cedula,Nombre,Apellido1,Apellido2,Direccion,Correo,Password,Altura,Peso,Fecha_nac)\r\nVALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},{8},'{9}')",
+                        client.cedula_cliente,
+                        client.nombre,
+                        client.apellido_1,
+                        client.apellido_2,
+                        client.direccion,
+                        client.email,
+                        encrypted_password,
+                        client.altura,
+                        client.peso,
+                        client.fecha_nac);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
 
 
     }
