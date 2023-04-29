@@ -13,8 +13,8 @@ namespace REST_API_GymTEC.Controllers
     public class LoginWorkerController : ControllerBase
     {
 
-        [HttpGet("auth_worker")]
-        public async Task<ActionResult<JSON_Object>> AuthWorker([FromQuery] Credentials_Worker credentials)
+        [HttpPost("auth_worker")]
+        public async Task<ActionResult<JSON_Object>> AuthWorker(Credentials_Worker credentials)
         {
 
             JSON_Object json = new JSON_Object("error", null);

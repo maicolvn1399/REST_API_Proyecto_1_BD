@@ -127,7 +127,17 @@ namespace REST_API_GymTEC.Controllers
         public async Task<ActionResult<JSON_Object>> DeleteBranch(Branch_Identifier branch_to_delete)
         {
             JSON_Object json = new JSON_Object("error", null);
-            return BadRequest(json);
+            bool var = DatabaseConnection.ExecuteDeleteBranch(branch_to_delete);
+            if (var)
+            {
+                json.status = "ok";
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
         }
 
 

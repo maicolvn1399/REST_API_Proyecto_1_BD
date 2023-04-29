@@ -5,7 +5,7 @@
 
     public class Associate_treatment
     {
-        public string sucursal { get; set; } = string.Empty;    
-        public string tratamiento { get; set; } = string.Empty; 
+        public string sucursal { get; set; } = string.Empty;
+        public int num_serie { get; set; } = 0;
     }
 }

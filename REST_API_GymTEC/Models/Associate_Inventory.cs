@@ -5,6 +5,6 @@
     public class Associate_Inventory
     {
         public string sucursal { get; set; } = string.Empty;
-        public string equipo { get; set; } = string.Empty;
+        public int num_serie { get; set; } = 0;
     }
 }

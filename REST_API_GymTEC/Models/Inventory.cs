@@ -5,9 +5,8 @@
     {
         public int num_serie { get; set; }
         public string marca { get; set; }
-        public float costo { get; set; }
+        public double costo { get; set; }
         public bool is_used { get; set; }
         public string tipo_equipo { get; set; }
-        public string nombre_sucursal { get; set; }
     }
 }

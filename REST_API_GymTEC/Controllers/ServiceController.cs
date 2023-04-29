@@ -17,15 +17,17 @@ namespace REST_API_GymTEC.Controllers
             JSON_Object ob = new JSON_Object("error", null);
             try
             {
-                DataTable dt = DatabaseConnection.ExecuteGetServices();
+                
+                //DataTable dt = DatabaseConnection.ExecuteGetServices();
+
 
                 List<Service> service_list = new List<Service>();
 
-                foreach (DataRow row in dt.Rows)
+                //foreach (DataRow row in dt.Rows)
                 {
                     Service service = new Service();
-                    service.nombre_sucursal = row["nombre_sucursal"].ToString();
-                    service.servicio = row["servicio"].ToString();
+                    //service.nombre_sucursal = row["nombre_sucursal"].ToString();
+                    //service.servicio = row["servicio"].ToString();
 
                     service_list.Add(service);
                 }
@@ -47,17 +49,18 @@ namespace REST_API_GymTEC.Controllers
         public async Task<ActionResult<JSON_Object>> Add_Service(ServiceAdd serviceAdd)
         {
             JSON_Object ob = new JSON_Object("error", null);
-            bool var = DatabaseConnection.ExecuteAddService(serviceAdd);
+            //bool var = DatabaseConnection.ExecuteAddService(serviceAdd);
 
-            if (var)
-            {
-                ob.status = "ok";
-                return Ok(ob);
-            }
-            else
-            {
-                return BadRequest(ob);
-            }
+            //if (var)
+            //{
+                //ob.status = "ok";
+                //return Ok(ob);
+            //}
+           // else
+            //{
+                //return BadRequest(ob);
+            //}
+            return Ok(ob);
 
         }
     }
