@@ -64,5 +64,22 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+        [HttpPost("delete_client")]
+        public async Task<ActionResult<JSON_Object>> DeleteClient(Cedula_Cliente cliente)
+        {
+            JSON_Object json = new JSON_Object("error", null);
+            bool var = DatabaseConnection.ExecuteDeleteClient(cliente);
+
+            if (var)
+            {
+                json.status = "ok";
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
     }
 }

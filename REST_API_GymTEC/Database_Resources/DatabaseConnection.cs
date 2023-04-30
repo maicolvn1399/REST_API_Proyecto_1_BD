@@ -1514,6 +1514,40 @@ namespace REST_API_GymTEC.Database_Resources
 
 
 
+            
+        }
+        public static bool ExecuteDeleteClient(Cedula_Cliente cliente)
+        {
+
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("UPDATE ClientesXClase\r\nSET Cliente_cedula = NULL\r\nWHERE Cliente_cedula = '{0}'\r\n\r\nDELETE FROM Cliente\r\nWHERE Cedula = '{0}'", cliente.cedula_cliente);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
 
         }
     }
