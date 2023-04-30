@@ -28,7 +28,8 @@ namespace REST_API_GymTEC.Database_Resources
                 da.Fill(table);
                 return table;
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -55,7 +56,8 @@ namespace REST_API_GymTEC.Database_Resources
                 da.Fill(table);
                 return table;
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -85,11 +87,13 @@ namespace REST_API_GymTEC.Database_Resources
 
                 }
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
-            } finally
+            }
+            finally
             {
                 conn.Close();
             }
@@ -113,7 +117,8 @@ namespace REST_API_GymTEC.Database_Resources
                 da.Fill(table);
 
                 return table;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("DatabaseConnection");
                 Console.WriteLine(ex.Message);
@@ -154,7 +159,8 @@ namespace REST_API_GymTEC.Database_Resources
                 return (i > 0) ? true : false;
 
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -219,7 +225,8 @@ namespace REST_API_GymTEC.Database_Resources
 
 
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -237,7 +244,7 @@ namespace REST_API_GymTEC.Database_Resources
             SqlConnection conn = new SqlConnection(cadenaConexion);
             try
             {
-                
+
                 conn.Open();
                 string query = String.Format("DELETE from TelefonoXSucursal\r\n" +
                     "where Sucursal_nombre = '{0}'\r\n\r\n" +
@@ -254,7 +261,7 @@ namespace REST_API_GymTEC.Database_Resources
                     "SET Sucursal = NULL\r\n" +
                     "where Sucursal = '{0}'\r\n\r\n" +
                     "DELETE from Sucursal\r\n" +
-                    "where Nombre = '{0}'",branch_to_delete.nombre_sucursal);
+                    "where Nombre = '{0}'", branch_to_delete.nombre_sucursal);
 
                 Console.WriteLine(query);
                 //Ejecucion de query 
@@ -263,7 +270,8 @@ namespace REST_API_GymTEC.Database_Resources
                 int i = cmd.ExecuteNonQuery();
                 //Retorna true si se ejecuta correctamente
                 return (i > 0) ? true : false;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -274,7 +282,7 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
 
-            
+
 
         }
 
@@ -299,7 +307,8 @@ namespace REST_API_GymTEC.Database_Resources
 
                 return table;
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -335,7 +344,8 @@ namespace REST_API_GymTEC.Database_Resources
             {
                 Console.WriteLine(e.Message);
                 return null;
-            } finally
+            }
+            finally
             { conn.Close(); }
         }
 
@@ -473,7 +483,8 @@ namespace REST_API_GymTEC.Database_Resources
                 int i = cmd.ExecuteNonQuery();
                 return (i > 0) ? true : false;
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
@@ -502,7 +513,8 @@ namespace REST_API_GymTEC.Database_Resources
                 return (i > 0) ? true : false;
 
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
@@ -529,7 +541,8 @@ namespace REST_API_GymTEC.Database_Resources
                 int i = cmd.ExecuteNonQuery();
                 return (i > 0) ? true : false;
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
@@ -557,11 +570,13 @@ namespace REST_API_GymTEC.Database_Resources
 
 
                 return table;
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
-            } finally { conn.Close(); }
+            }
+            finally { conn.Close(); }
 
         }
 
@@ -655,7 +670,9 @@ namespace REST_API_GymTEC.Database_Resources
                 int i = cmd.ExecuteNonQuery();
                 return (i > 0) ? true : false;
 
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
                 return false;
             }
@@ -819,7 +836,7 @@ namespace REST_API_GymTEC.Database_Resources
             {
                 puesto = 4;
             }
-            
+
 
             //Se genera la conexion con la base de datos
             SqlConnection conn = new SqlConnection(cadenaConexion);
@@ -948,7 +965,7 @@ namespace REST_API_GymTEC.Database_Resources
 
             try
             {
-                
+
                 conn.Open();
                 //Se genera el query de SQL
                 string query = String.Format("UPDATE Clase Set Encargado = null\r\nwhere Encargado = '{0}'\r\n\r\nUPDATE Sucursal \r\nSet Manager = null\r\nwhere Manager = '{0}'\r\n\r\nDELETE FROM Empleado\r\nwhere Cedula = '{0}'", cedula.cedula_empleado);
@@ -1304,7 +1321,7 @@ namespace REST_API_GymTEC.Database_Resources
                 return table;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
@@ -1337,7 +1354,8 @@ namespace REST_API_GymTEC.Database_Resources
 
                 return table;
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
@@ -1413,25 +1431,90 @@ namespace REST_API_GymTEC.Database_Resources
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(table);
 
-                foreach(DataRow row in table.Rows)
+                foreach (DataRow row in table.Rows)
                 {
                     capacity = Convert.ToInt32(row["Capacidad"]);
                 }
                 return capacity;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
-                Console.WriteLine(e.Message);   
+                Console.WriteLine(e.Message);
                 return 0;
             }
             finally
             {
                 conn.Close();
             }
-            
+
         }
-        
+
+        public static DataTable ExecuteGetServices()
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+
+
+                string query = String.Format("SELECT Sucursal_nombre as nombre_sucursal, Servicio.Descripcion as servicio\r\nFROM Servicio INNER JOIN ServicioXSucursal on Servicio.ID = ServicioXSucursal.Servicio_ID");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+        public static bool ExecuteAddService(ServiceAdd serviceAdd)
+        {
+
+            //Se genera la conexion con la base de datos
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                conn.Open();
+                //Se genera el query de SQL
+                string query = String.Format("INSERT INTO Servicio(Descripcion)" +
+                    "\r\nVALUES('{0}')",
+                    serviceAdd.servicio);
+
+                Console.WriteLine(query);
+                //Ejecucion de query 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                //Retorna true si se ejecuta correctamente
+                return (i > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
 
 
 
+
+        }
     }
 }
