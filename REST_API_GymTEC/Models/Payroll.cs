@@ -7,6 +7,6 @@
         public string empleado_cedula { get; set; } = string.Empty;
         public string nombre_planilla { get; set; } = string.Empty;
 
-        public double salario = 0.0f;
+        public double salario { get; set; }
     }
 }

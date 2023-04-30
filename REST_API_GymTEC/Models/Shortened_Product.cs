@@ -5,6 +5,6 @@
     public class Shortened_Product
     {
         public string nombre_producto { get; set; } = string.Empty;
-        public float costo { get; set; }
+        public double costo { get; set; }
     }
 }
