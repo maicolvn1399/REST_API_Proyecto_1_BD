@@ -11,7 +11,7 @@ namespace REST_API_GymTEC.Controllers
     {
         [HttpPost("auth_client")]
 
-        public async Task<ActionResult<JSON_Object>> LoginClient([FromQuery] Credentials_Client credentials)
+        public async Task<ActionResult<JSON_Object>> LoginClient(Credentials_Client credentials)
         {
             JSON_Object ob = new JSON_Object("error", null);
             try
