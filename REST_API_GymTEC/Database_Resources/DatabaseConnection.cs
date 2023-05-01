@@ -106,7 +106,7 @@ namespace REST_API_GymTEC.Database_Resources
             try
             {
 
-                string query = String.Format("SELECT Nombre, Fecha_aper, Horario, Cap_max, Provincia, Canton, Distrito, Manager, activeSpa, activeStore\r\nFROM Sucursal\r\nWHERE Nombre = '{0}'",
+                string query = String.Format("SELECT Nombre, CAST(Fecha_aper as varchar) as Fecha_aper, Horario, Cap_max, Provincia, Canton, Distrito, Manager, activeSpa, activeStore\r\nFROM Sucursal\r\nWHERE Nombre = '{0}'",
                     branch_to_get.nombre_sucursal);
                 Console.WriteLine(query);
                 conn.Open();
