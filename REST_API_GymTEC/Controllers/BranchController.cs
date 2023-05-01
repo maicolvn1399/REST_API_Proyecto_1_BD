@@ -44,7 +44,7 @@ namespace REST_API_GymTEC.Controllers
 
 
         [HttpPost("get_branch")]
-        public async Task<ActionResult<JSON_Object>> GetBranch([FromQuery] Branch_Identifier branch_to_get)
+        public async Task<ActionResult<JSON_Object>> GetBranch(Branch_Identifier branch_to_get)
         {
             JSON_Object json = new JSON_Object("error", null);
             try
