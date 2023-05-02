@@ -999,7 +999,7 @@ namespace REST_API_GymTEC.Database_Resources
             {
 
 
-                string query = String.Format("SELECT Nombre as nombre_producto, Costo as costo\r\nFROM Producto");
+                string query = String.Format("SELECT Codigo_barras as codigo_barras, Nombre as nombre_producto, Costo as costo\r\nFROM Producto");
                 Console.WriteLine(query);
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(query, conn);

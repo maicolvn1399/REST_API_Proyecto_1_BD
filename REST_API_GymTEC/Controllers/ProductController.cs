@@ -24,6 +24,7 @@ namespace REST_API_GymTEC.Controllers
                 {
                     Shortened_Product product = new Shortened_Product();
 
+                    product.codigo_barras = row["codigo_barras"].ToString();
                     product.nombre_producto = row["nombre_producto"].ToString();
                     product.costo = (double)row["costo"];
 
