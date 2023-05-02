@@ -1573,5 +1573,52 @@ namespace REST_API_GymTEC.Database_Resources
             }
             finally { conn.Close(); }
         }
+        public static bool ExecuteAssociateService(Associate_Service service)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            int servicio = 0;
+            try
+            {
+                if (service.servicio == "Indoor Cycling")
+                {
+                    servicio = 1;
+                }
+                if (service.servicio == "Pilates")
+                {
+                    servicio = 2;
+                }
+                if (service.servicio == "Yoga")
+                {
+                    servicio = 3;
+                }
+                if (service.servicio == "Zumba")
+                {
+                    servicio = 4;
+                }
+                if (service.servicio == "Natacion")
+                {
+                    servicio = 5;
+                }
+                if (service.servicio == "Crossfit")
+                {
+                    servicio = 6;
+                }
+                conn.Open();
+                string query = string.Format("INSERT INTO ServicioXSucursal(Sucursal_nombre,Servicio_ID)VALUES('{0}',{1})", service.sucursal, servicio);
+                Console.WriteLine(query);
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                return (i > 0) ? true : false;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
+        }
     }
 }

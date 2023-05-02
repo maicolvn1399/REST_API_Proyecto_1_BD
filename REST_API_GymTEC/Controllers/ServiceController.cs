@@ -62,5 +62,21 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+        [HttpPost("associate_service")]
+        public async Task<ActionResult<JSON_Object>> AssociateService(Associate_Service service)
+        {
+            JSON_Object json = new JSON_Object("error", null);
+            bool var = DatabaseConnection.ExecuteAssociateService(service);
+            if (var)
+            {
+                json.status = "ok";
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
     }
 }
