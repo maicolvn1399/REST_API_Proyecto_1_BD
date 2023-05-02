@@ -1550,5 +1550,28 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
         }
+        public static bool ExecuteCopyBranch(Branch_Copier branch)
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try { conn.Open();
+                string query = string.Format("DECLARE @newtable TABLE (\r\nNombre VARCHAR(100) NULL)\r\n\r\nINSERT INTO @newtable(Nombre)\r\nVALUES('{1}')\r\n\r\nINSERT INTO Sucursal(Nombre,Fecha_aper,Horario,Cap_max,Provincia,Canton,Distrito,Manager,activeSpa,activeStore)\r\nSELECT b.Nombre as Nombre, Fecha_aper,Horario,Cap_max,Provincia,Canton,Distrito,Manager,activeSpa,activeStore\r\nFROM Sucursal, @newtable b\r\nWHERE Sucursal.Nombre = '{0}'\r\n\r\nINSERT INTO ProductoXSucursal(Sucursal_nombre,Producto_ID)\r\nSELECT b.Nombre, p.Producto_ID\r\nFROM ProductoXSucursal p, @newtable b\r\nWHERE p.Sucursal_nombre = '{0}'\r\n\r\nINSERT INTO TratamientoXSucursal(Sucursal_nombre,Tratamiento_ID)\r\nSELECT b.Nombre, t.Tratamiento_ID\r\nFROM TratamientoXSucursal t, @newtable b\r\nWHERE t.Sucursal_nombre = '{0}'",
+                branch.branch_to_copy,
+                branch.new_branch);
+
+                Console.WriteLine(query);
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                return (i > 0) ? true : false;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
     }
 }

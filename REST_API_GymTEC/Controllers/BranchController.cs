@@ -140,11 +140,29 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        [HttpPost("copy_branch")]
+        public async Task<ActionResult<JSON_Object>> CopyBranch(Branch_Copier new_branch)
+        {
+            JSON_Object json = new JSON_Object("error", null);
+            bool var = DatabaseConnection.ExecuteCopyBranch(new_branch);
 
-
-
-
-
+            if (var)
+            {
+                json.status = "ok";
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest(json);
+            }
 
         }
+
+
+
+
+
+
+
+    }
 }
