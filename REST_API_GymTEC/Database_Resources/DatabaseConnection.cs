@@ -584,17 +584,15 @@ namespace REST_API_GymTEC.Database_Resources
         public static bool ExecuteAssociateTreatment(Associate_treatment associate_Treatment)
         {
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            int treatment_type;
 
             try
             {
 
                 conn.Open();
-                string query = string.Format("UPDATE Inventario\r\n" +
-                    "SET Sucursal = '{0}'\r\n" +
-                    "WHERE Num_serie = {1}",
+                string query = string.Format("INSERT INTO TratamientoXSucursal(Sucursal_nombre, Tratamiento_ID)\r\n" +
+                    "VALUES('{0}',{1})",
                     associate_Treatment.sucursal,
-                    associate_Treatment.num_serie);
+                    associate_Treatment.tratamiento_id);
 
                 Console.WriteLine(query);
 

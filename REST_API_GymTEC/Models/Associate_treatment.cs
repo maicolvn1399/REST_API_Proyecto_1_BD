@@ -6,6 +6,6 @@
     public class Associate_treatment
     {
         public string sucursal { get; set; } = string.Empty;
-        public int num_serie { get; set; } = 0;
+        public int tratamiento_id { get; set; } = 0;
     }
 }
