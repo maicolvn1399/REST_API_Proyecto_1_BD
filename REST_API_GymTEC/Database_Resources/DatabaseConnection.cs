@@ -584,17 +584,15 @@ namespace REST_API_GymTEC.Database_Resources
         public static bool ExecuteAssociateTreatment(Associate_treatment associate_Treatment)
         {
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            int treatment_type;
 
             try
             {
 
                 conn.Open();
-                string query = string.Format("UPDATE Inventario\r\n" +
-                    "SET Sucursal = '{0}'\r\n" +
-                    "WHERE Num_serie = {1}",
+                string query = string.Format("INSERT INTO TratamientoXSucursal(Sucursal_nombre, Tratamiento_ID)\r\n" +
+                    "VALUES('{0}',{1})",
                     associate_Treatment.sucursal,
-                    associate_Treatment.num_serie);
+                    associate_Treatment.tratamiento_id);
 
                 Console.WriteLine(query);
 
@@ -1620,5 +1618,38 @@ namespace REST_API_GymTEC.Database_Resources
             }
 
         }
+
+        public static DataTable ExecuteGetAllTreatments()
+        {
+            SqlConnection conn = new SqlConnection(cadenaConexion);
+            try
+            {
+                string query = String.Format("SELECT ID, Descripcion \r\n" +
+                    "FROM Tratamiento ");
+                Console.WriteLine(query);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable table = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+
     }
 }
