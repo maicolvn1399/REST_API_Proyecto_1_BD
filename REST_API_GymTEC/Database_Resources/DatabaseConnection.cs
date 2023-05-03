@@ -1337,7 +1337,7 @@ namespace REST_API_GymTEC.Database_Resources
             SqlConnection conn = new SqlConnection(cadenaConexion);
             try
             {
-                string query = string.Format("SELECT Servicio.Descripcion as servicio, TratamientoXSucursal.Sucursal_nombre as sucursal, Clase.ID as id, Modo as modo, Clase.Capacidad as capacidad, Clase.Fecha as fecha, Clase.Hora_ing as hora_ing, Clase.Hora_sal as hora_sal, Clase.Encargado as encargado\r\n" +
+                string query = string.Format("SELECT Servicio.Descripcion as servicio, TratamientoXSucursal.Sucursal_nombre as sucursal, Clase.ID as id, Modo as modo, Clase.Capacidad as capacidad, CAST(Clase.Fecha as varchar) as fecha, Clase.Hora_ing as hora_ing, Clase.Hora_sal as hora_sal, Clase.Encargado as encargado\r\n" +
                     "FROM Servicio \r\n" +
                     "INNER JOIN Clase ON Servicio.ID = Clase.Servicio\r\n" +
                     "INNER JOIN TratamientoXSucursal ON Servicio.ID = TratamientoXSucursal.Tratamiento_ID\r\n" +
