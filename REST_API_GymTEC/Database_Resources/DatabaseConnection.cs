@@ -1339,7 +1339,7 @@ namespace REST_API_GymTEC.Database_Resources
                     "FROM Servicio \r\n" +
                     "INNER JOIN Clase ON Servicio.ID = Clase.Servicio\r\n" +
                     "INNER JOIN TratamientoXSucursal ON Servicio.ID = TratamientoXSucursal.Tratamiento_ID\r\n" +
-                    "WHERE fecha = '{0}' AND Sucursal_nombre = '{1}' ",
+                    "WHERE fecha = '{0}' AND Sucursal_nombre = '{1}' AND Clase.Capacidad > 0",
                     filters.fecha,
                     filters.sucursal);
                 Console.WriteLine(query);
