@@ -115,6 +115,7 @@ namespace REST_API_GymTEC.Controllers
             }
             else
             {
+                json.status = "You are already enrolled in this class!";
                 return BadRequest(json);
             }
             
