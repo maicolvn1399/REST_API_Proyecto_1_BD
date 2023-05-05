@@ -553,7 +553,7 @@ namespace REST_API_GymTEC.Database_Resources
 
         public static DataTable ExecuteGetNonAssociatedInv()
         {
-            SqlConnection conn = new SqlConnection();
+            SqlConnection conn = new SqlConnection(cadenaConexion);
             try
             {
                 string query = string.Format("SELECT Inventario.Num_serie as num_serie, Tipo_Equipo.Descripcion as tipo_equipo\r\n" +
@@ -587,7 +587,6 @@ namespace REST_API_GymTEC.Database_Resources
 
             try
             {
-
                 conn.Open();
                 string query = string.Format("INSERT INTO TratamientoXSucursal(Sucursal_nombre, Tratamiento_ID)\r\n" +
                     "VALUES('{0}',{1})",
