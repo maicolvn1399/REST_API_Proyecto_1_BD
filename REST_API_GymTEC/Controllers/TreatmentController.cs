@@ -5,12 +5,20 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+
+    /// <summary>
+    /// Treatment Controller 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class TreatmentController : ControllerBase
     {
 
-
+        /// <summary>
+        /// HTTP POST method to associate a treatment to a branch 
+        /// </summary>
+        /// <param name="associate_Treatment"> refers to object of treatment to be associated with a branch </param>
+        /// <returns>returns a json with the status confirming if the query was succesfull or not</returns>
         [HttpPost("associate_treatment")]
         public async Task<ActionResult<JSON_Object>> AssociateTreatment(Associate_treatment associate_Treatment)
         {
@@ -28,7 +36,10 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
-
+        /// <summary>
+        /// HTTP GET method to get all the treatments from the database 
+        /// </summary>
+        /// <returns>json with all the treatments stored in the database </returns>
         [HttpGet("get_all_treatments")]
         public async Task<ActionResult<JSON_Object>> GetAllTreatments()
         {
