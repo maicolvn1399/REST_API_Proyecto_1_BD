@@ -5,11 +5,19 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+    /// <summary>
+    /// Controller for class 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class ClassController : ControllerBase
     {
 
+        /// <summary>
+        /// HTTP POST method to create a new class 
+        /// </summary>
+        /// <param name="new_class"> new class to add into the database </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("create_class")]
         public async Task<ActionResult<JSON_Object>> CreateClass(Class new_class)
         {
@@ -27,6 +35,10 @@ namespace REST_API_GymTEC.Controllers
                 
         }
 
+        /// <summary>
+        /// HTTP GET method to get all the classes from a table 
+        /// </summary>
+        /// <returns> json with all the classes </returns>
         [HttpGet("get_all_classes")]
         public async Task<ActionResult<JSON_Object>> GetAllClasses()
         {
@@ -64,7 +76,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
-
+        /// <summary>
+        /// HTTP POST method to get the classes filtered 
+        /// </summary>
+        /// <param name="filters"> filters of branch and date </param>
+        /// <returns> json with all the classes that fit the filters </returns>
         [HttpPost("filter_class")]
         public async Task<ActionResult<JSON_Object>> FilterClass(FilterClass filters)
         {
@@ -101,8 +117,12 @@ namespace REST_API_GymTEC.Controllers
             }
         }
 
-        
 
+        /// <summary>
+        /// HTTP POST method to enroll a client to a class 
+        /// </summary>
+        /// <param name="enroll_class"> information to enroll a client into a class </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("enroll_class")]
         public async Task<ActionResult<JSON_Object>> EnrollClass(Enroll_Class enroll_class)
         {
