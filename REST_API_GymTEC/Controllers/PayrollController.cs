@@ -5,11 +5,18 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+    /// <summary>
+    /// Payroll controller 
+    /// </summary>
     [ApiController]
     [Route("api")]
 
     public class PayrollController : ControllerBase
     {
+        /// <summary>
+        /// HTTP GET method to get all the payrolls stored in the database 
+        /// </summary>
+        /// <returns> json with all the payrolls </returns>
         [HttpGet("get_all_payrolls")]
 
         public async Task<ActionResult<JSON_Object>> GetAllPayrolls() { 
@@ -44,6 +51,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP POST method to get a specific payroll for an employee 
+        /// </summary>
+        /// <param name="cd"> identifier for employee to get their respective payroll information </param>
+        /// <returns>json with the information of the payroll for this specific employee </returns>
         [HttpPost("get_payroll")]
         public async Task<ActionResult<JSON_Object>> GetPayroll(Employee_Identifier cd)
         {
