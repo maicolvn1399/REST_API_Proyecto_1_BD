@@ -5,10 +5,20 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+
+    /// <summary>
+    /// Controller for Client
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class ClientController : ControllerBase
     {
+
+        /// <summary>
+        /// HTTP POST method to authenticate a client 
+        /// </summary>
+        /// <param name="credentials"> refers to email and password provided by the user </param>
+        /// <returns> json with the information of the client </returns>
         [HttpPost("auth_client")]
 
         public async Task<ActionResult<JSON_Object>> LoginClient(Credentials_Client credentials)
@@ -47,6 +57,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP POST method to add a new client to the database 
+        /// </summary>
+        /// <param name="cliente"> refers to the information of the client to be added to the table </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("create_client")]
         public async Task<ActionResult<JSON_Object>> CreateClient(Client_Register cliente)
         {
@@ -64,7 +80,13 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
-        [HttpPost("delete_client")]
+
+        /// <summary>
+        /// HTTP DELETE to delete a client from the database 
+        /// </summary>
+        /// <param name="cliente"> refers to the identifier of the client that will be deleted </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
+        [HttpDelete("delete_client")]
         public async Task<ActionResult<JSON_Object>> DeleteClient(Cedula_Cliente cliente)
         {
             JSON_Object json = new JSON_Object("error", null);
