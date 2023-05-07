@@ -6,10 +6,17 @@ using System.Data;
 namespace REST_API_GymTEC.Controllers
 
 {
+    /// <summary>
+    /// Service Controller 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class ServiceController : ControllerBase
     {
+        /// <summary>
+        /// HTTP GET method to get all the services available in the gym 
+        /// </summary>
+        /// <returns> returrns a json with all the services available </returns>
         [HttpGet("get_services")]
         public async Task<ActionResult<JSON_Object>> Get_Services()
         {
@@ -44,6 +51,11 @@ namespace REST_API_GymTEC.Controllers
             }
         }
 
+        /// <summary>
+        /// HTTP POST method to add a new service into the database 
+        /// </summary>
+        /// <param name="serviceAdd">refers to the object of the new service to be added </param>
+        /// <returns> returns a json with the status confirming if the query was succesfull or not </returns>
         [HttpPost("add_service")]
 
         public async Task<ActionResult<JSON_Object>> Add_Service(ServiceAdd serviceAdd)
@@ -62,6 +74,11 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+        /// <summary>
+        /// HTTP POST method to associate a service to a branch 
+        /// </summary>
+        /// <param name="service"> refers to the service that will be associated to a branch </param>
+        /// <returns>returns a json with the status confirming if the query was succesfull or not</returns>
         [HttpPost("associate_service")]
         public async Task<ActionResult<JSON_Object>> AssociateService(Associate_Service service)
         {
