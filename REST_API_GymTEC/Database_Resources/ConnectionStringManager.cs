@@ -4,9 +4,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace REST_API_GymTEC.Database_Resources
 {
+    /// <summary>
+    /// Class to get the connection string to connect to the database
+    /// </summary>
+    
     public class ConnectionStringManager
     {
-
+        /// <summary>
+        /// Method to get the necessary string to connect to a database
+        /// The connection string is hosted in a solution file called appsettings.json 
+        /// </summary>
+        /// <returns> 
+        /// Returns a string with the sql authentication credentials and the name of the database to connect
+        /// </returns>
         public static string GetConnectionString()
         {
             var builder = new ConfigurationBuilder()
