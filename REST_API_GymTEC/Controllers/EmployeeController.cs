@@ -5,10 +5,19 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+
+    /// <summary>
+    /// Controller for Employee 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class EmployeeController : ControllerBase
     {
+
+        /// <summary>
+        /// HTTP GET method to get all the employees from a table 
+        /// </summary>
+        /// <returns> json with the information of all the employees </returns>
         [HttpGet("get_all_employees")]
 
         public async Task<ActionResult<JSON_Object>> GetAllEmployees()
@@ -48,6 +57,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP POST method to get an employee in specific 
+        /// </summary>
+        /// <param name="cedula"> identifier to get a specific employee </param>
+        /// <returns> returns a json with the information of the requested employee </returns>
         [HttpPost("get_employee")]
 
         public async Task<ActionResult<JSON_Object>> GetEmployee(Employee_Identifier cedula)
@@ -90,6 +105,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP POST method to add a new employee to a table 
+        /// </summary>
+        /// <param name="new_employee"> refers to the object of the new employee </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("add_employee")]
 
         public async Task<ActionResult<JSON_Object>> AddEmployee(Employee_Extended new_employee)
@@ -108,6 +129,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP PUT method to update an employee 
+        /// </summary>
+        /// <param name="updated_employee"> refers to the object of the updated employee </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPut("update_employee")]
         public async Task<ActionResult<JSON_Object>> UpdateEmployee(Employee_Extended updated_employee)
         {
@@ -124,6 +151,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP DELETE method to delete an employee 
+        /// </summary>
+        /// <param name="cedula"> refers to the identifier of the employee that will be deleted </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpDelete("delete_employee")]
         public async Task<ActionResult<JSON_Object>> DeleteEmployee(Employee_Identifier cedula)
         {
