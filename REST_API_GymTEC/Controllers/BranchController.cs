@@ -5,13 +5,19 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
-    //Controller for Branch
+
+    /// <summary>
+    /// Controller for Branch
+    /// </summary>
 
     [ApiController]
     [Route("api")]
     public class BranchController : ControllerBase
     {
-
+        /// <summary>
+        /// Http GET method to get all branches 
+        /// </summary>
+        /// <returns> returns a json with all the branches information </returns>
         [HttpGet("get_all_branches")]
         public async Task<ActionResult<JSON_Object>> GetAllBranches()
         {
@@ -42,6 +48,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP POST method to get a single branch information 
+        /// </summary>
+        /// <param name="branch_to_get"> identifier for the branch to get  </param>
+        /// <returns> returns a json with the branch information </returns>
 
         [HttpPost("get_branch")]
         public async Task<ActionResult<JSON_Object>> GetBranch(Branch_Identifier branch_to_get)
@@ -86,7 +97,11 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
-
+        /// <summary>
+        /// HTTP POST method to add a new branch 
+        /// </summary>
+        /// <param name="new_branch"> object to add into the database </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("add_branch")]
         public async Task<ActionResult<JSON_Object>> AddBranch(Branch new_branch)
         {
@@ -106,6 +121,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP PUT method to update a branch 
+        /// </summary>
+        /// <param name="updated_branch"> object to update the database </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPut("update_branch")]
         public async Task<ActionResult<JSON_Object>> UpdateBranch(Branch updated_branch)
         {
@@ -123,6 +143,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP DELETE method to delete a branch 
+        /// </summary>
+        /// <param name="branch_to_delete"> identifier for the branch that needs to be deleted </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpDelete("delete_branch")]
         public async Task<ActionResult<JSON_Object>> DeleteBranch(Branch_Identifier branch_to_delete)
         {
@@ -139,6 +164,12 @@ namespace REST_API_GymTEC.Controllers
             }
 
         }
+
+        /// <summary>
+        /// HTTP POST method to copy a branch's properties into a new one 
+        /// </summary>
+        /// <param name="new_branch"> branch to copy the previous infomation into </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
 
         [HttpPost("copy_branch")]
         public async Task<ActionResult<JSON_Object>> CopyBranch(Branch_Copier new_branch)
