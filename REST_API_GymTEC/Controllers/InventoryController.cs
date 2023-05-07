@@ -5,12 +5,18 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
-
+    /// <summary>
+    /// Controller for Inventory 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class InventoryController : ControllerBase
     {
-
+        
+        /// <summary>
+        /// HTTP GET method to get all the inventories 
+        /// </summary>
+        /// <returns>json with all the inventories in the databaase </returns>
         [HttpGet("get_all_inventories")]
         public async Task<ActionResult<JSON_Object>> GetAllInventories()
         {
@@ -42,6 +48,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP POST to get an inventory in specific 
+        /// </summary>
+        /// <param name="inventory_Identifier"> refers to the identifier of the inventory that is requested </param>
+        /// <returns> json with the respective information for this inventory </returns>
         [HttpPost("get_inventory")]
         public async Task<ActionResult<JSON_Object>> GetInventory(Inventory_Identifier inventory_Identifier)
         {
@@ -73,6 +84,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP POST method to add a new inventory to the database 
+        /// </summary>
+        /// <param name="new_inventory"> refers to the object of the new inventory </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpPost("add_inventory")]
         public async Task<ActionResult<JSON_Object>> AddInventory(Inventory new_inventory)
         {
@@ -90,6 +106,11 @@ namespace REST_API_GymTEC.Controllers
             
         }
 
+        /// <summary>
+        /// HTTP PUT method to update an inventory in the database 
+        /// </summary>
+        /// <param name="inventory_to_update"> refers to the object of inventory to be updated </param>
+        /// <returns>returns a json with a status message confirming the success of the query</returns>
         [HttpPut("update_inventory")]
         public async Task<ActionResult<JSON_Object>> UpdateInventory(Inventory inventory_to_update)
         {
@@ -107,6 +128,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP DELETE method to delete an inventory 
+        /// </summary>
+        /// <param name="inventory_Identifier"> refers to the identifier of the inventory to be deleted </param>
+        /// <returns> returns a json with a status message confirming the success of the query </returns>
         [HttpDelete("delete_inventory")]
         public async Task<ActionResult<JSON_Object>> DeleteInventory(Inventory_Identifier inventory_Identifier)
         {
@@ -124,6 +150,11 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP POST method to associate an inventory 
+        /// </summary>
+        /// <param name="associate_Inventory"> refers to an object to associate an inventory to a branch </param>
+        /// <returns>returns a json with a status message confirming the success of the query </returns>
         [HttpPost("associate_inventory")]
         public async Task<ActionResult<JSON_Object>> AssociateInventory(Associate_Inventory associate_Inventory)
         {
@@ -141,6 +172,10 @@ namespace REST_API_GymTEC.Controllers
 
         }
 
+        /// <summary>
+        /// HTTP GET method to get all the inventories that are not associated in the database 
+        /// </summary>
+        /// <returns>returns a json with all the non associated inventories </returns>
         [HttpGet("get_non_associated_inv")]
         public async Task<ActionResult<JSON_Object>> GetNonAssociatedInventories()
         {
