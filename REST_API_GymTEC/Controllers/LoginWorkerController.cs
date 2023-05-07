@@ -8,11 +8,18 @@ using System.Text.Json.Serialization;
 namespace REST_API_GymTEC.Controllers
 {
 
+    /// <summary>
+    /// Employee controller 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class LoginWorkerController : ControllerBase
     {
-
+        /// <summary>
+        /// HTTP POST method to authenticate an employee 
+        /// </summary>
+        /// <param name="credentials"> refers to id and password to authenticate the employee </param>
+        /// <returns> returns a json with the employee information </returns>
         [HttpPost("auth_worker")]
         public async Task<ActionResult<JSON_Object>> AuthWorker(Credentials_Worker credentials)
         {
