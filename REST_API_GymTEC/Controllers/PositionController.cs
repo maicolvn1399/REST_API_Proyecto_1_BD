@@ -5,10 +5,17 @@ using System.Data;
 
 namespace REST_API_GymTEC.Controllers
 {
+    /// <summary>
+    /// Position Controller 
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class PositionController : ControllerBase
     {
+        /// <summary>
+        /// HTTP GET method to get all the positions of the employees stored in the database 
+        /// </summary>
+        /// <returns> json with all the positions </returns>
         [HttpGet("get_positions")]
 
         public async Task<ActionResult<JSON_Object>> GetPositions()
